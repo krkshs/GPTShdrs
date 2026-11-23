@@ -19,7 +19,7 @@ py -3.10 tools/validate_shaders.py --all-options --require-compiler
 
 ## Ожидает игрового теста
 
-Загрузка в Minecraft 1.16.5 / OptiFine, внешний вид и FPS на RTX 3050 4 ГБ. Проверка glslang не запускает игру и не проверяет работу загрузчика, OpenGL-драйвера или картинки.
+Загрузка в Minecraft 1.16.5 / OptiFine, внешний вид и FPS на NVIDIA GeForce RTX 3050 Laptop GPU 4 ГБ с Intel Core i5-12450H и 16 ГБ ОЗУ. Проверка glslang не запускает игру и не проверяет работу загрузчика, OpenGL-драйвера или картинки.
 
 Маршрут проверки: [TESTING.md](TESTING.md).
 

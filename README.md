@@ -1,71 +1,79 @@
 # GPTShdrs
 
-Эксперимент: создать реалистичный шейдер для Minecraft с помощью ИИ, развивая его по результатам игровых тестов.
+**English** | [Русский](README.ru.md) | [简体中文](README.zh-CN.md)
 
-**0.1.0-alpha.1 · Minecraft Java 1.16.5 · OptiFine.** Целевая видеокарта первого теста — NVIDIA RTX 3050, 4 ГБ. Исходники написаны для этого проекта. Лицензия MIT.
+An experiment in creating a realistic Minecraft shader with AI and improving it through real in-game feedback.
+
+**0.1.0-alpha.1 · Minecraft Java 1.16.5 · OptiFine.** The source code was written for this project. MIT license.
+
+Hardware for the first in-game test:
+
+- GPU: **NVIDIA GeForce RTX 3050 Laptop GPU, 4 GB VRAM**.
+- RAM: **16 GB**.
+- CPU: **Intel Core i5-12450H**.
 
 ## Alpha 1
 
-- Солнечные и лунные тени с мягкими краями и регулируемой дальностью.
-- Линейное освещение: тёплое солнце и факелы, прохладный свет неба.
-- Контактное затемнение SSAO и плавное освещение Minecraft.
-- Процедурное небо, закат, солнечный/лунный диски и звёзды.
-- Атмосферный и подводный туман, пасмурное освещение в дождь.
-- Вода с небольшими волнами, движущимися нормалями, бликами и отражением неба по Френелю.
-- Ветер в траве, цветах, посевах и листве; слабый блеск мокрых поверхностей.
-- HDR, Bloom, тональная кривая ACES, FXAA, экспозиция и насыщенность.
-- Профили LOW, BALANCED, HIGH; русское и английское меню.
+- Sun and moon shadows with filtered edges and adjustable distance.
+- Linear-space lighting: warm sunlight and torches, cool skylight.
+- Screen-space contact shading (SSAO) and Minecraft smooth lighting.
+- Procedural sky, sunset, sun and moon disks, and stars.
+- Atmospheric and underwater fog, overcast lighting during rain.
+- Water with small waves, animated normals, highlights, and Fresnel sky reflections.
+- Wind in grass, flowers, crops, and leaves; subtle highlights on wet surfaces.
+- HDR, Bloom, ACES tone mapping, FXAA, exposure, and saturation controls.
+- LOW, BALANCED, and HIGH presets; Russian and English shader option menus.
 
-Альфа ориентирована на обычный мир. **В Незере и Энде шейдеры отключены через папки измерений**, используется обычный рендер OptiFine. Вода отражает небо; отражения блоков, преломления, объёмных облаков, трассировки лучей и PBR пока нет. Iris и моды с другими измерениями не проверялись.
+This alpha focuses on the Overworld. **Shaders are disabled in the Nether and the End using dimension folders**, which select OptiFine's vanilla rendering fallback. Water reflects the sky; block reflections, refraction, volumetric clouds, ray tracing, and PBR are not implemented yet. Iris and mods with additional dimensions have not been tested.
 
-## Установка
+## Installation
 
-1. Установи Minecraft Java **1.16.5** с OptiFine; рекомендуется **HD U G8** или более поздняя сборка для 1.16.5.
-2. Возьми **GPTShdrs-0.1.0-alpha.1.zip** из папки `dist` после сборки.
-3. В игре открой **Настройки → Настройки графики → Шейдеры → Папка с шейдерами**.
-4. Помести ZIP в открывшуюся папку `shaderpacks`. **Распаковывать не нужно.**
-5. Вернись в игру и выбери GPTShdrs. Внутри ZIP папка `shaders` уже на правильном уровне.
+1. Install Minecraft Java **1.16.5** with OptiFine; **HD U G8** or a later build for 1.16.5 is recommended.
+2. Get **GPTShdrs-0.1.0-alpha.1.zip** from the `dist` folder after building.
+3. In Minecraft, open **Options → Video Settings → Shaders → Shaders Folder**.
+4. Place the ZIP in the opened `shaderpacks` folder. **Do not extract it.**
+5. Return to Minecraft and select GPTShdrs. The ZIP already has `shaders` at the correct root level.
 
-Можно скопировать папку исходного проекта в `shaderpacks/GPTShdrs`: внутри должна быть папка `shaders`. Исходный ZIP GitHub с дополнительной вложенной папкой сначала нужно распаковать.
+You can also copy the source project folder into `shaderpacks/GPTShdrs`, with `shaders` directly inside it. GitHub's source ZIP includes an extra enclosing directory and must be extracted first.
 
-## Настройки для первого теста
+## Settings for the first test
 
-Для RTX 3050 4 ГБ начни с **BALANCED**, **1920×1080**, **10–12 чанков** и обычного ресурспака. Render Regions выключи. В OptiFine оставь качество рендера/теней **1×**, сглаживание OptiFine **OFF**, старое освещение **OFF** или Default. FXAA выполняется самим шейдером.
+For the RTX 3050 Laptop 4 GB, Core i5-12450H, and 16 GB RAM, start with **BALANCED**, **1920×1080**, **10–12 chunks**, and default textures. Disable Render Regions. Set OptiFine render and shadow quality to **1×**, OptiFine antialiasing to **OFF**, and old lighting to **OFF** or Default. The shader provides its own FXAA.
 
-BALANCED: тени **2048×2048 / 96 блоков / 8 выборок**, SSAO, Bloom и эффекты воды включены. Если FPS недостаточен, выбери **LOW**: **1024×1024 / 64 блока / 4 выборки**, SSAO и Bloom выключены.
+BALANCED uses **2048×2048 shadows / 96-block distance / 8 samples**, with SSAO, Bloom, and water effects enabled. If performance is insufficient, select **LOW**: **1024×1024 / 64 blocks / 4 samples**, with SSAO and Bloom disabled.
 
-**FPS пока не измерен.** Настройки — отправная точка; итог зависит от процессора, разрешения, модов и лимита мощности ноутбука.
+**FPS has not been measured yet.** These are starting settings; performance also depends on CPU load, resolution, mods, and the laptop's power limit.
 
-## Первый отчёт
+## First test report
 
-Маршрут и шаблон: [docs/TESTING.md](docs/TESTING.md).
+Test route and report template: [docs/TESTING.md](docs/TESTING.md) (Russian).
 
-Нужны точная сборка OptiFine, разрешение, профиль, дальность прорисовки, FPS и скриншоты днём, на закате, ночью, у воды и в пещере. При красной ошибке приложи её текст и соответствующий фрагмент `logs/latest.log` из папки игры.
+Include the exact OptiFine build, resolution, preset, render distance, FPS, and screenshots during the day, at sunset, at night, near water, and in a cave. For a red shader error, include its text and the relevant section of the game's `logs/latest.log`.
 
-Успешная компиляция GLSL проверяет синтаксис и связку стадий. Работу пакета, картинку и производительность в OptiFine подтверждает игровой тест.
+Successful GLSL compilation checks syntax and the vertex/fragment stage interface. Loading, visuals, and performance in OptiFine require an in-game test.
 
-## Разработка и сборка
+## Development and building
 
-Нужен **Python 3.10+**. Сборка использует только стандартную библиотеку:
+Requires **Python 3.10+**. The build uses only the Python standard library:
 
 ```powershell
 py -3 tools/build_pack.py
 ```
 
-Структура, включения, меню и профили:
+Check the pack layout, includes, menu options, and presets:
 
 ```powershell
 py -3 tools/validate_shaders.py
 ```
 
-Обязательная компиляция для всех профилей и вариантов отключения эффектов требует [glslang](https://github.com/KhronosGroup/glslang/releases). Добавь `glslang` / `glslangValidator` в PATH, распакуй Windows-сборку в `.tools/glslang` или укажи путь:
+Compiling all presets and effect switch configurations requires [glslang](https://github.com/KhronosGroup/glslang/releases). Add `glslang` / `glslangValidator` to PATH, extract the Windows build into `.tools/glslang`, or provide its path:
 
 ```powershell
 py -3 tools/validate_shaders.py --validator "C:/tools/glslang/bin/glslang.exe" --all-options --require-compiler
 ```
 
-Без компилятора обычная проверка явно сообщает о пропуске компиляции; `--require-compiler` завершится ошибкой. Сборщик проверяет структуру, а компиляцию перед выпуском запускают отдельно.
+Without a compiler, the normal check explicitly reports that compilation was skipped; `--require-compiler` fails. The build script checks the pack layout; run compilation separately before releasing.
 
-В `dist` создаются ZIP и файл SHA-256. Архив содержит шейдеры, лицензию и документацию, без Git, инструментов и кэша. Одинаковые исходники дают одинаковый ZIP.
+The ZIP and SHA-256 file are created in `dist`. The ZIP contains shaders, the license, and documentation in all three README languages, excluding Git, tools, and caches. Identical sources produce an identical ZIP.
 
-Архитектура: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). История: [CHANGELOG.md](CHANGELOG.md).
+Architecture: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) (Russian). History: [CHANGELOG.md](CHANGELOG.md) (Russian).

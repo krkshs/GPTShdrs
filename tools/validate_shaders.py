@@ -107,7 +107,7 @@ def validate_structure() -> list[str]:
         folder = SHADERS / dimension
         if not folder.is_dir() or list(folder.glob("*.?sh")):
             raise ValueError(f"{dimension} must exist without shader programs")
-    for required in ("README.md", "LICENSE", "VERSION", "shaders/block.properties",
+    for required in ("README.md", "README.ru.md", "README.zh-CN.md", "LICENSE", "VERSION", "shaders/block.properties",
                      "shaders/lang/en_us.lang", "shaders/lang/ru_ru.lang"):
         if not (ROOT / required).is_file():
             raise ValueError(f"Missing pack file: {required}")

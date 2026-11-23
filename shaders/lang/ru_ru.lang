@@ -40,4 +40,4 @@ screen.POST=Цвет и эффекты
 profile.LOW=Низкий
 profile.BALANCED=Сбалансированный
 profile.HIGH=Высокий
-profile.BALANCED.comment=Начальный профиль для RTX 3050 4 ГБ. FPS требует игрового теста.
+profile.BALANCED.comment=Начальный профиль для RTX 3050 Laptop 4 ГБ. FPS требует игрового теста.

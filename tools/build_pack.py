@@ -21,7 +21,8 @@ def build(destination: Path) -> tuple[Path, str, int]:
         raise ValueError("Invalid VERSION filename characters")
     destination.mkdir(parents=True, exist_ok=True)
     archive = destination / f"GPTShdrs-{version}.zip"
-    files = [ROOT / name for name in ("README.md", "LICENSE", "VERSION", "CHANGELOG.md")]
+    files = [ROOT / name for name in ("README.md", "README.ru.md", "README.zh-CN.md",
+                                    "LICENSE", "VERSION", "CHANGELOG.md")]
     files.extend(sorted((ROOT / "shaders").rglob("*")))
     files.extend(sorted((ROOT / "docs").glob("*.md")))
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as output:

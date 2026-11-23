@@ -5,6 +5,8 @@
 - Keep shadow and main-pass vertex animation and shadow distortion consistent.
 - Treat only block.10000 as water. Glass, ice and other translucent blocks retain their materials.
 - Keep default option values consistent with the BALANCED profile. Update both language files for new options.
+- Keep README.md (English), README.ru.md (Russian) and README.zh-CN.md (Simplified Chinese) in sync and include them in the pack.
+- First-test hardware: NVIDIA GeForce RTX 3050 Laptop GPU with 4 GB VRAM, 16 GB RAM, Intel Core i5-12450H.
 - Preserve empty-program folders world-1 and world1 until dimension support is implemented and tested.
 - Before delivering shader changes, run tools/validate_shaders.py --all-options --require-compiler and tools/build_pack.py. Python 3.10+ is required. Also run git diff --check.
 - Never describe Minecraft loading, visuals or FPS as tested unless the game was actually run or the user supplied a report. Static GLSL checks are separate.

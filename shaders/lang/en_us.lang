@@ -40,4 +40,4 @@ screen.POST=Color and effects
 profile.LOW=Low
 profile.BALANCED=Balanced
 profile.HIGH=High
-profile.BALANCED.comment=Starting profile for RTX 3050 4 GB. FPS requires in-game testing.
+profile.BALANCED.comment=Starting profile for RTX 3050 Laptop 4 GB. FPS requires in-game testing.
