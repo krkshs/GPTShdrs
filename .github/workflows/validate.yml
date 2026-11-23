@@ -1,0 +1,31 @@
+name: Validate and build shader pack
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shader-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install GLSL validator
+        run: sudo apt-get update && sudo apt-get install -y glslang-tools
+      - name: Compile all profiles and effect switches
+        run: python tools/validate_shaders.py --all-options --require-compiler
+      - name: Build installable ZIP
+        run: python tools/build_pack.py
+      - name: Check whitespace
+        run: git diff --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GPTShdrs-alpha
+          path: dist/*
+          if-no-files-found: error
