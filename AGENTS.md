@@ -8,5 +8,6 @@
 - Preserve empty-program folders world-1 and world1 until dimension support is implemented and tested.
 - Before delivering shader changes, run tools/validate_shaders.py --all-options --require-compiler and tools/build_pack.py. Python 3.10+ is required. Also run git diff --check.
 - Never describe Minecraft loading, visuals or FPS as tested unless the game was actually run or the user supplied a report. Static GLSL checks are separate.
-- Update VERSION and CHANGELOG.md for releases. Use codex/ branches and v-prefixed version tags.
+- Update VERSION and CHANGELOG.md for releases. Use v-prefixed version tags.
+- Work directly in main and push completed changes immediately. Do not create separate branches unless the user explicitly requests one.
 - Do not commit dist/, .tools/, compiled binaries or caches.
