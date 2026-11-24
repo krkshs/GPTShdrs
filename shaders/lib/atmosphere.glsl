@@ -8,7 +8,7 @@ vec3 atmosphere(vec3 direction, bool disks) {
     float elevation = saturate(direction.y);
     float horizon = pow(1.0 - elevation, 4.0);
     vec3 zenith = mix(vec3(0.006, 0.012, 0.028), vec3(0.085, 0.26, 0.56), day);
-    vec3 horizonColor = mix(vec3(0.025, 0.038, 0.067), vec3(0.54, 0.68, 0.78), day);
+    vec3 horizonColor = mix(vec3(0.025, 0.038, 0.067), vec3(0.38, 0.50, 0.62), day);
     vec3 sky = mix(zenith, horizonColor, horizon);
     float sunset = (1.0 - smoothstep(0.02, 0.35, abs(sunDir.y))) * day;
     float towardSun = pow(saturate(dot(direction, sunDir) * 0.5 + 0.5), 8.0);

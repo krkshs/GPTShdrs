@@ -111,6 +111,12 @@ def validate_structure() -> list[str]:
                      "shaders/lang/en_us.lang", "shaders/lang/ru_ru.lang"):
         if not (ROOT / required).is_file():
             raise ValueError(f"Missing pack file: {required}")
+    for language in ("en_us", "ru_ru"):
+        labels = {line.partition("=")[0] for line in
+                  (SHADERS / f"lang/{language}.lang").read_text(encoding="utf-8").splitlines()}
+        missing = sorted(name for name in schema if f"option.{name}" not in labels)
+        if missing:
+            raise ValueError(f"Missing option labels in {language}: {missing}")
     return sorted(vertices)
 
 
@@ -137,8 +143,9 @@ def configured_source(path: Path, values: dict[str, str]) -> str:
                         lambda m: m.group(1) + value, source, flags=re.MULTILINE)
         source = re.sub(rf"(^const\s+(?:int|float)\s+{re.escape(name)}\s*=\s*)[0-9.]+",
                         lambda m: m.group(1) + value, source, flags=re.MULTILINE)
-    # OptiFine injects format/environment macros after #version.
-    preamble = "#define RGBA16F 34842\n#define MC_VERSION 11605\n"
+    # Only inject the environment macro that OptiFine G8 actually provides.
+    # Buffer format enums must be defined by the pack, as on the real driver.
+    preamble = "#define MC_VERSION 11605\n"
     return source.replace("#version 120\n", "#version 120\n" + preamble, 1)
 
 

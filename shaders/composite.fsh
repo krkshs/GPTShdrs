@@ -1,4 +1,5 @@
 #version 120
+#include "/lib/formats.glsl"
 #include "/lib/common.glsl"
 uniform sampler2D colortex0;
 varying vec2 vTexCoord;

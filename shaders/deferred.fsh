@@ -1,4 +1,5 @@
 #version 120
+#include "/lib/formats.glsl"
 #include "/lib/atmosphere.glsl"
 #include "/lib/ssao.glsl"
 uniform sampler2D colortex0;

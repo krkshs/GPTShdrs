@@ -1,6 +1,9 @@
 #include "/lib/lighting.glsl"
 #include "/lib/atmosphere.glsl"
 #include "/lib/waving.glsl"
+#ifdef GPT_WATER
+#include "/lib/water.glsl"
+#endif
 uniform sampler2D texture;
 uniform vec4 entityColor;
 varying vec2 vTexCoord;
@@ -46,39 +49,20 @@ void main() {
 #else
     float ao = 1.0;
 #endif
-    color = surfaceLighting(albedo, normalWorld, relativeWorld, vLightmap, ao, hand);
+#ifdef GPT_WATER
+    if (abs(vBlockId - 10000.0) < 0.5) {
+        vec4 water = waterSurface(albedo, normalWorld, relativeWorld, vViewPosition, vLightmap);
+        color = water.rgb;
+        alpha = water.a;
+    } else
+#endif
+    {
+        color = surfaceLighting(albedo, normalWorld, relativeWorld, vLightmap, ao, hand);
+    }
 #endif
 
 #ifdef GPT_EMISSIVE
     color = max(color, albedo * 1.8);
-#endif
-
-#ifdef GPT_WATER
-    if (abs(vBlockId - 10000.0) < 0.5) {
-        vec3 waterNormal = normalWorld;
-#if WATER_WAVES == 1
-        if (normalWorld.y > 0.5) {
-            vec2 slope = waveSlope((relativeWorld + cameraPosition).xz);
-            waterNormal = normalize(vec3(-slope.x * 2.2, 1.0, -slope.y * 2.2));
-        }
-#endif
-        vec3 viewWorld = normalize(-relativeWorld);
-        float fresnel = 0.02 + 0.98 * pow(1.0 - saturate(abs(dot(waterNormal, viewWorld))), 5.0);
-        vec3 waterTint = mix(vec3(0.018, 0.12, 0.15), albedo, 0.12);
-        color = surfaceLighting(waterTint, waterNormal, relativeWorld, vLightmap, 1.0, false);
-        alpha = 1.0 - WATER_TRANSPARENCY;
-#if WATER_REFLECTIONS == 1
-        vec3 reflection = atmosphere(reflect(-viewWorld, waterNormal), true);
-        float openSky = pow(vLightmap.y, 4.0);
-        color = mix(color, reflection, fresnel * openSky);
-        alpha = mix(alpha, 0.96, fresnel * openSky);
-#endif
-        vec3 halfVector = normalize(lightDirection() + viewWorld);
-        float specular = pow(saturate(dot(waterNormal, halfVector)), 180.0);
-        float visibility = shadowVisibility(relativeWorld, waterNormal);
-        color += directLightColor() * specular * visibility * pow(vLightmap.y, 3.0) * 2.0;
-        normalWorld = waterNormal;
-    }
 #endif
 
 #ifdef GPT_TERRAIN

@@ -38,7 +38,7 @@ vec3 lightDirection() { return worldDirection(shadowLightPosition); }
 float daylight() { return smoothstep(-0.10, 0.12, sunDirection().y); }
 vec3 directLightColor() {
     float height = saturate(sunDirection().y * 3.0);
-    vec3 sunlight = mix(vec3(1.8, 0.63, 0.25), vec3(1.55, 1.38, 1.12), height);
+    vec3 sunlight = mix(vec3(1.45, 0.64, 0.30), vec3(1.25, 1.19, 1.08), height);
     vec3 moonlight = vec3(0.075, 0.105, 0.17);
     return mix(moonlight, sunlight, daylight()) * (1.0 - rainStrength * 0.78);
 }
